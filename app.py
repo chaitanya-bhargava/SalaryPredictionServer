@@ -34,7 +34,5 @@ def create_app():
     app.register_blueprint(main)
     return app
 
-if __name__ == "__main__":
-    # Init spark context and load libraries
-    app = create_app()
-    app.run()
+app = create_app()
+app.run()
