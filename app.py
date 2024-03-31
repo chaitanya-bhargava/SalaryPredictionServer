@@ -2,12 +2,18 @@ from model import SalaryPredictor
 from flask import Flask,request
 from flask import Blueprint
 import pandas as pd
-main = Blueprint('main', __name__)
 import csv
 
 from flask_cors import CORS
 
-@main.route("/predict", methods=["GET"])
+global salary_predictor 
+
+salary_predictor = SalaryPredictor()    
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route("/predict", methods=["GET"])
 def movie_ratings():
     age=request.args.get('age')
     gender=request.args.get('gender')
@@ -24,15 +30,6 @@ def movie_ratings():
     ratings=ratings.to_json(orient="records")
     return ratings
 
-def create_app():
-    global salary_predictor 
- 
-    salary_predictor = SalaryPredictor()    
-    
-    app = Flask(__name__)
-    CORS(app)
-    app.register_blueprint(main)
-    return app
 
-app = create_app()
-app.run()
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')   
