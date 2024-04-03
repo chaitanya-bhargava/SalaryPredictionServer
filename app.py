@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app)
 
 @app.route("/predict", methods=["GET"])
-def movie_ratings():
+def salary():
     age=request.args.get('age')
     gender=request.args.get('gender')
     educationLevel=request.args.get('educationLevel')
